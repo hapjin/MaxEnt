@@ -8,7 +8,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 
-/**
+/**http://www.hankcs.com/nlp/maximum-entropy-java-implementation.html
  * 最大熵的简明实现，提供训练与预测接口，训练算法采用GIS训练算法
  * @author hankcs
  */
@@ -25,7 +25,7 @@ public class MaxEnt
     /**
      * 每个特征的出现次数
      */
-    List<Integer> featureCountList = new ArrayList<Integer>();
+    List<Integer> featureCountList = new ArrayList<Integer>();//与featureList 下标 一一 对应
     /**
      * 事件（类别）集
      */
@@ -70,25 +70,25 @@ public class MaxEnt
         while (line != null)
         {
             String[] segs = line.split("\\s");
-            String label = segs[0];
+            String label = segs[0];//第一列表示当天的活动
             List<String> fieldList = new ArrayList<String>();
             for (int i = 1; i < segs.length; ++i)
             {
                 fieldList.add(segs[i]);
-                Feature feature = new Feature(label, segs[i]);
+                Feature feature = new Feature(label, segs[i]);//每一行有多个Feature(代表当天的环境)
                 int index = featureList.indexOf(feature);
                 if (index == -1)
                 {
-                    featureList.add(feature);
+                    featureList.add(feature);//特征第一次出现,设置特征次数为1
                     featureCountList.add(1);
                 }
                 else
                 {
-                    featureCountList.set(index, featureCountList.get(index) + 1);
+                    featureCountList.set(index, featureCountList.get(index) + 1);//特征再一次出现,特征次数加1
                 }
             }
             if (fieldList.size() > C) C = fieldList.size();
-            Instance instance = new Instance(label, fieldList);
+            Instance instance = new Instance(label, fieldList);//train.txt 一行 对应一个 Instance
             instanceList.add(instance);
             if (labels.indexOf(label) == -1) labels.add(label);
             line = br.readLine();
