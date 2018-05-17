@@ -8,7 +8,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 
-/**http://www.hankcs.com/nlp/maximum-entropy-java-implementation.html
+/**
+ * http://www.hankcs.com/nlp/maximum-entropy-java-implementation.html
  * 最大熵的简明实现，提供训练与预测接口，训练算法采用GIS训练算法
  * @author hankcs
  */
