@@ -22,7 +22,7 @@ public class MaxEnt
     /**
      * 特征列表，来自所有事件的统计结果
      */
-    List<Feature> featureList = new ArrayList<Feature>();
+    List<Feature> featureList = new ArrayList<Feature>();//A 叉乘 B
     /**
      * 每个特征的出现次数
      */
@@ -103,12 +103,17 @@ public class MaxEnt
     public void train(int maxIt)
     {
         int size = featureList.size();
-        weight = new double[size];               // 特征权重
+        weight = new double[size];               // 特征权重 (训练之后得到的模型)
         double[] empiricalE = new double[size];   // 经验期望
         double[] modelE = new double[size];       // 模型期望
 
         for (int i = 0; i < size; ++i)
         {
+	    /**
+	     * 特征i的经验期望 = 1/N*\Sigma_{j=1}^{N}(f_i(a_j, b_j))
+	     * N = instanceList.size()
+	     * \Sigma_{j=1}^{N}f(_i(a_j,b_j)) = featureCountList.get(i)
+	     */
             empiricalE[i] = (double) featureCountList.get(i) / instanceList.size();
         }
 
