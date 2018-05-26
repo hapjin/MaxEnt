@@ -88,7 +88,7 @@ public class MaxEnt
                     featureCountList.set(index, featureCountList.get(index) + 1);//特征再一次出现,特征次数加1
                 }
             }
-            if (fieldList.size() > C) C = fieldList.size();
+            if (fieldList.size() > C) C = fieldList.size();//C 是训练样本中选取的特征总数
             Instance instance = new Instance(label, fieldList);//train.txt 一行 对应一个 Instance
             instanceList.add(instance);
             if (labels.indexOf(label) == -1) labels.add(label);
